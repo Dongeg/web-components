@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <div id="app">
+		<datepicker v-model="date"></datepicker>
+		<br>
+		<span>开始时间：</span>
+		<datepicker v-model="startDate" :max="endDate == '' ? '3016-01-01' : endDate" ></datepicker>
+		<span>结束时间：</span>
+		<datepicker v-model="endDate" :min="startDate"></datepicker>
+    </div>
+	<script src="vue2.5/vue.js"></script>
+	<script src="./dist/index.js"></script>
+	<script>
+	    new Vue({
+	        el: '#app',
+	        components: { datepicker },
+			data: function () {
+			  return {
+				date: "",
+				startDate:'',
+				endDate:''
+			  }
+			}
+	    })	
+	</script>
+</body>
+</html>

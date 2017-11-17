@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ch-ZN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        input {
+            border: none;
+            border: 1px solid #aaa;
+            outline: none;
+        }
+        .main {
+            width: 500px;
+            margin: 0 auto;
+        }
+        .input-label {
+            display: inline-block;
+            width: 7rem;
+        }
+        .submit-btn {
+            width: 173px;
+            margin-left: 115px;
+        }
+        /*错误提示样式*/
+        .Validform_wrong {
+            color: red;
+        }
+        .Validform_error {
+            border-color: red;
+        }
+        .ps {
+            text-indent: 2rem;
+            line-height: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <h2>行内写校验规则</h2>
+    <form action="" id="demo1form">
+        <p>
+            <label class="input-label" for="username">用户名:</label>
+            <input type="text" id="username" datatype="username" errormsg="格式不正确">
+        </p>
+        <p>
+            <label class="input-label" for="pwd">密码:</label>
+            <input type="password" name="pwd" id="pwd" datatype="*6-16" errormsg="6-16位密码">
+        </p>
+        <p>
+            <label class="input-label" for="repwd">重复密码:</label>
+            <input type="password" id="repwd" datatype="*6-16" recheck="pwd">
+        </p>
+        <p>
+            <label class="input-label" for="repwd">婚姻状况</label>
+            <select name="province" datatype="*" nullmsg="结婚了没！" errormsg="结婚了没！">
+                <option value="">请选择</option>
+                <option value="1">未婚</option>
+                <option value="2">已婚</option>
+                <option value="3">保密</option>
+            </select>
+        </p>
+        <p>
+            <label class="input-label" for="repwd">性别</label>
+            <label for="man">男<input type="radio" name="gender" id="man" value="1"></label>
+            <label for="woman">女<input type="radio" id="woman" name="gender" value="2" datatype="*" errormsg="请选择性别！"></label>
+        </p>
+        <p>
+            <label class="input-label" for="repwd">爱好</label>
+            <label for="eat">吃<input name="love" type="checkbox" value="1" id="eat"></label>
+            <label for="sleep">睡<input name="love" type="checkbox" value="2" id="sleep"></label>
+            <label for="play">玩<input name="love" type="checkbox" value="3" id="play" datatype="*" nullmsg="你喜欢啥！"></label>
+        </p>
+        <p>
+            <input type="submit" id="submit" class="submit-btn">
+        </p>
+    </form>
+    <h2>js写校验规则</h2>
+    <form action="" id="demo2form">
+        <p>
+            <label class="input-label" for="demo2name">用户名:</label>
+            <input type="text" id="demo2name">
+        </p>
+        <p>
+            <label class="input-label" for="demo2pwd">密码:</label>
+            <input type="password" name="demo2pwd" id="demo2pwd">
+        </p>
+        <p>
+            <label class="input-label" for="demo2repwd">重复密码:</label>
+            <input type="password" id="demo2repwd">
+        </p>
+        <p>
+            <label class="input-label">婚姻状况</label>
+            <select name="province" id="isMarry">
+                <option value="">请选择</option>
+                <option value="1">未婚</option>
+                <option value="2">已婚</option>
+                <option value="3">保密</option>
+            </select>
+        </p>
+        <p>
+            <label class="input-label">性别</label>
+            <label for="demo2man">男<input type="radio" name="gender" id="demo2man" value="1"></label>
+            <label for="demo2woman">女<input type="radio" id="demo2woman" name="gender" value="2"></label>
+        </p>
+        <p>
+            <label class="input-label" for="repwd">爱好</label>
+            <label for="demo2eat">吃<input name="love" type="checkbox" value="1" id="demo2eat"></label>
+            <label for="demo2sleep">睡<input name="love" type="checkbox" value="2" id="demo2sleep"></label>
+            <label for="demo2play">玩<input name="love" type="checkbox" value="3" id="demo2play"></label>
+        </p>
+        <p>
+            <input type="submit" id="demo2submit" class="submit-btn">
+        </p>
+    </form>
+    <p class="ps">
+        本demo校验错误提示信息的显示位置为tiptype:3,当前元素的siblings中，如果代码里没有写
+        <textarea readonly style="width: 500px;height: 1rem"><span class="Validform_checktip Validform_wrong"></span></textarea>
+        会自动创建
+    </p>
+    <p class="ps">当tiptype值不同时,本demo的提示信息可能错位，请根据实际情况创建错误信息的容器标签，例如tiptype:2时，
+        会在当前元素的父级的next对象的子级查找显示提示信息的对象，就可以在对应位置新建一个空的div标签
+    </p>
+    <p class="ps">radio 和 checkbox 表单元素只需给他们每组中其中的一个绑定类型就可以</p>
+    <p class="ps">详情访问<a href="http://validform.rjboy.cn/document.html" target="_blank">点这里</a></p>
+</div>
+<script src="jquery-3.2.1.min.js"></script>
+<script src="validform.min.js"></script>
+<script>
+    $("#demo1form").Validform({
+        tiptype:3,
+        datatype: {
+            "username" : /([a-zA-Z0-9_-]{4,16})/
+        }
+    })
+    var demo2=$("#demo2form").Validform({
+        tiptype:3,
+    })
+    demo2.addRule([
+        {
+            ele:"#demo2name",
+            datatype:"s6-18",
+            nullmsg:"请输入昵称！",
+            errormsg:"昵称至少6个字符,最多18个字符！"
+        },
+        {
+            ele:"#demo2pwd",
+            datatype:"*6-16",
+            nullmsg:"请设置密码！",
+            errormsg:"密码范围在6~16位之间！"
+        },
+        {
+            ele:"#demo2repwd",
+            datatype:"*",
+            recheck:"demo2pwd",
+            nullmsg:"请再输入一次密码！",
+            errormsg:"密码不一致！"
+        },
+        {
+            ele:"#isMarry",
+            datatype:"*",
+            nullmsg:"嫁给我好么！",
+            errormsg:"嫁给我好么！"
+        },
+        {
+            ele:"#demo2woman",
+            datatype:"*",
+            nullmsg:"请选择性别！",
+            errormsg:"请选择性别！"
+        },
+        {
+            ele:"#demo2play",
+            datatype:"*",
+            nullmsg:"你喜欢啥！",
+            errormsg:"你喜欢啥！"
+        }
+    ]);
+</script>
+</body>
+</html>

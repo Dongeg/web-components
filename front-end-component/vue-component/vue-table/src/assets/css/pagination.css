@@ -1,0 +1,25 @@
+.el-pagination {
+  font-weight: normal;
+}
+.el-pager li {
+  border:1px solid #e2e2e2;
+  border-right: none;
+}
+.el-pager li.active+li {
+   border-left:1px solid #e2e2e2;
+}
+.el-pager li:last-child {
+  border-right:1px solid #e2e2e2;
+}
+.btn-prev {
+  border:1px solid #e2e2e2 !important;
+  border-right: none !important;
+}
+.btn-next {
+  border:1px solid #e2e2e2 !important;
+  border-left: none !important;
+}
+.el-pager li.active {
+  background-color:#1E9FFF;
+  color: #fff;
+}
